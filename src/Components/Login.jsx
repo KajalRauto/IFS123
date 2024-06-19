@@ -38,6 +38,7 @@ function Login() {
 
   const goback = () => {
     console.log(userEmail.current.value + " logged in successfully")
+    toast.success(userEmail.current.value + " logged in successfully")
     setTimeout(() => {
       sessionStorage.status = true
       sessionStorage.email = userEmail.current.value

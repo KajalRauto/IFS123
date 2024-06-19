@@ -27,6 +27,7 @@ function SignUp() {
     var result = clientlist.find(val => val.Email === userEmail.current.value)
     const goback = () => {
       console.log(userEmail.current.value + " registered in successfully")
+      toast.success(userEmail.current.value + " registered in successfully")
       setTimeout(() => {
         sessionStorage.status = true
         sessionStorage.email = userEmail.current.value
@@ -35,12 +36,12 @@ function SignUp() {
     }
 
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmail.current.value)) {
-      toast("Enter valid email address(abc@po.in)");
+      toast.error("Enter valid email address(abc@po.in)");
     } else if (!/^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$/.test(userPassword.current.value)) {
-      toast("Enter a strong password");
+      toast.error("Enter a strong password");
       // 8 characters + alphanumeric 
     } else if (result) {
-      toast("Username or email is already registered");
+      toast.error("Username or email is already registered");
     } else {
       const newCredential = {
         Email: userEmail.current.value,
@@ -53,6 +54,7 @@ function SignUp() {
         .post("http://localhost:8080/clients", newCredential)
         .then((response) => goback());
       setCartItemsList([])
+      toast.success("Signed up successfully")
     }
 
   };
